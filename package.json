@@ -48,7 +48,11 @@
     "web-components",
     "ui"
   ],
-  "author": "",
+  "author": "anmolx21 <sirkinggreat@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anmolx21/fluid-day-night-toggle"
+  },
   "license": "MIT",
   "peerDependencies": {
     "react": ">=16.8.0",
