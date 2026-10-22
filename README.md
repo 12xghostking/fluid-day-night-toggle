@@ -1,81 +1,110 @@
 # Fluid Sun-to-Moon Day/Night Toggle Switch ☀️ ⇄ 🌙
 
-A physics-inspired, fluid Day/Night mode toggle engineered with 3D inset cavity depth, celestial morphing, dynamic eclipse rim lighting, and atmospheric sky transitions based on the visual specifications.
+A physics-inspired, fluid Day/Night mode toggle engineered with 3D inset cavity depth, celestial morphing, dynamic eclipse rim lighting, and atmospheric sky transitions.
 
-![Toggle Preview](preview.png)
-
----
-
-## ✨ Features & Visual Physics
-
-1. **Sun-to-Moon Celestial Morphing**:
-   - **Sun (Day Mode)**: Warm golden-amber sphere with 3D radial lighting, soft drop glow, and layered cumulus clouds drifting at the bottom/right.
-   - **Moon (Night Mode)**: Silver-slate lunar disc with 3 distinct craters precisely positioned with interior cavity shadows.
-   - **Signature Golden Crescent Rim**: When transitioning to night, the moon slides into place while revealing the sun's warm golden rim along the left edge, exactly as shown in the reference screenshots.
-
-2. **Kinetic Squash & Stretch**:
-   - The thumb elongates horizontally during transit (`scaleX(1.18) scaleY(0.88)`) and springs back into a perfect sphere upon reaching its destination, giving it authentic physical weight and inertia.
-
-3. **3D Inset Cavity Bezel**:
-   - Multi-layer `box-shadow` depth creating a physical debossed slot stamped into the surface with top-left ambient shadows and bottom-right specular highlights.
-
-4. **Atmospheric Environment**:
-   - **Day Mode**: Layered cumulus clouds hugging the bottom-right rim with subtle floating ambient motion.
-   - **Night Mode**: Cross-fades into midnight navy with 3 four-pointed sparkle stars (✦) and 8 dot stars with gentle twinkling animations.
-   - When switching, clouds smoothly sink downwards (`translateY(115%)`) while stars gracefully blossom into view.
-
-5. **Production Ready & Accessible**:
-   - Semantic HTML with WAI-ARIA `role="switch"` and `aria-checked`.
-   - Full keyboard accessibility (<kbd>Tab</kbd> to focus, <kbd>Space</kbd> or <kbd>Enter</kbd> to toggle).
-   - Zero-dependency: pure CSS transitions with hardware accelerated transforms.
-   - Includes standalone **React** and **Vue 3** components.
-   - Interactive Web Audio API sound effects (synthesized warm sunrise chime & dreamy night chime).
+Works seamlessly across **any** project or framework: **React**, **Vue 3**, **Universal Web Component (`<day-night-toggle>`)**, and **Vanilla HTML/CSS**.
 
 ---
 
-## 🚀 Quick Start (Open in Browser)
+## 🚀 Installation & Usage Across Projects
 
-Simply double click or open `index.html` in any browser:
-```bash
-# In powershell:
-start c:\Users\sirki\projects\fluid-day-night-toggle\index.html
+### 1. Universal Web Component (Any Framework or Plain HTML)
+
+Works in React, Vue, Svelte, Angular, Astro, WordPress, Shopify, or plain HTML without configuration:
+
+```html
+<!-- Import once (from NPM or CDN) -->
+<script type="module" src="https://unpkg.com/fluid-day-night-toggle"></script>
+
+<!-- Use anywhere in your markup -->
+<day-night-toggle checked size="md" sound="true"></day-night-toggle>
+
+<script>
+  const toggle = document.querySelector('day-night-toggle');
+  toggle.addEventListener('change', (e) => {
+    console.log('Is Night Mode:', e.detail.checked);
+    document.documentElement.setAttribute('data-theme', e.detail.checked ? 'dark' : 'light');
+  });
+</script>
 ```
 
 ---
 
-## 📦 Integration
+### 2. React / Next.js
 
-### 1. Pure HTML & CSS (Zero Dependencies)
+```bash
+npm install fluid-day-night-toggle
+```
 
-Copy the toggle HTML into your page:
+```jsx
+import React, { useState } from 'react';
+import { DayNightToggle } from 'fluid-day-night-toggle/react';
+
+export default function ThemeSwitch() {
+  const [isDark, setIsDark] = useState(false);
+
+  return (
+    <DayNightToggle 
+      checked={isDark} 
+      onChange={(e) => setIsDark(e.target.checked)} 
+      size="md" // 'sm' | 'md' | 'lg'
+    />
+  );
+}
+```
+
+---
+
+### 3. Vue 3 (Composition API)
+
+```bash
+npm install fluid-day-night-toggle
+```
+
+```vue
+<script setup>
+import { ref } from 'vue';
+import { DayNightToggle } from 'fluid-day-night-toggle/vue';
+
+const isDarkMode = ref(false);
+</script>
+
+<template>
+  <DayNightToggle v-model="isDarkMode" size="md" />
+</template>
+```
+
+---
+
+### 4. Pure CSS + HTML (Zero Dependencies)
+
+Include the CSS and drop the markup:
+
 ```html
-<label class="day-night-toggle" for="theme-switch">
-  <input type="checkbox" id="theme-switch" class="toggle-input" role="switch" aria-label="Toggle theme" />
-  
+<link rel="stylesheet" href="node_modules/fluid-day-night-toggle/src/DayNightToggle.css">
+<!-- or via CDN -->
+<link rel="stylesheet" href="https://unpkg.com/fluid-day-night-toggle/src/DayNightToggle.css">
+
+<label class="day-night-toggle size-md">
+  <input type="checkbox" class="toggle-input" role="switch" aria-label="Toggle theme" />
   <div class="toggle-track">
-    <!-- Day Sky & Clouds -->
     <div class="sky sky-day">
       <svg class="clouds-svg" viewBox="0 0 240 100" preserveAspectRatio="none">
+        <path fill="rgba(255,255,255,0.5)" d="M 95 100 L 240 100 L 240 46 C 230 43, 218 46, 212 55 C 205 38, 185 35, 172 47 C 165 42, 150 42, 142 50 C 134 46, 120 48, 115 58 C 107 55, 98 62, 95 72 Z" />
         <path fill="#ffffff" d="M 45 100 L 240 100 L 240 54 C 232 46, 218 48, 210 59 C 202 50, 186 49, 176 60 C 166 52, 148 54, 140 65 C 130 58, 114 62, 108 72 C 98 66, 84 70, 78 80 C 68 76, 54 84, 48 94 Z" />
       </svg>
     </div>
-
-    <!-- Night Sky & Stars -->
     <div class="sky sky-night">
       <div class="stars-layer">
-        <svg class="star star-sparkle star-1" viewBox="0 0 24 24"><path d="M 12 0 C 12 7, 7 12, 0 12 C 7 12, 12 17, 12 24 C 12 17, 17 12, 24 12 C 17 12, 12 7, 12 0 Z" fill="#ffffff" /></svg>
-        <svg class="star star-sparkle star-2" viewBox="0 0 24 24"><path d="M 12 0 C 12 7, 7 12, 0 12 C 7 12, 12 17, 12 24 C 12 17, 17 12, 24 12 C 17 12, 12 7, 12 0 Z" fill="#ffffff" /></svg>
-        <svg class="star star-sparkle star-3" viewBox="0 0 24 24"><path d="M 12 0 C 12 7, 7 12, 0 12 C 7 12, 12 17, 12 24 C 12 17, 17 12, 24 12 C 17 12, 12 7, 12 0 Z" fill="#ffffff" /></svg>
+        <svg class="star star-sparkle star-1" viewBox="0 0 24 24"><path d="M 12 0 C 12 7, 7 12, 0 12 C 7 12, 12 17, 12 24 C 12 17, 17 12, 24 12 C 17 12, 12 7, 12 0 Z" /></svg>
+        <svg class="star star-sparkle star-2" viewBox="0 0 24 24"><path d="M 12 0 C 12 7, 7 12, 0 12 C 7 12, 12 17, 12 24 C 12 17, 17 12, 24 12 C 17 12, 12 7, 12 0 Z" /></svg>
+        <svg class="star star-sparkle star-3" viewBox="0 0 24 24"><path d="M 12 0 C 12 7, 7 12, 0 12 C 7 12, 12 17, 12 24 C 12 17, 17 12, 24 12 C 17 12, 12 7, 12 0 Z" /></svg>
         <span class="star star-dot dot-1"></span>
         <span class="star star-dot dot-2"></span>
         <span class="star star-dot dot-3"></span>
       </div>
     </div>
-
-    <!-- Cutout Inset Cavity -->
     <div class="cavity-overlay"></div>
-
-    <!-- The Celestial Knob -->
     <div class="toggle-thumb">
       <div class="sun-body"></div>
       <div class="moon-body">
@@ -87,80 +116,58 @@ Copy the toggle HTML into your page:
   </div>
 </label>
 ```
-Include `DayNightToggle.css`.
 
 ---
 
-### 2. React / Next.js
+## 📤 How to Upload to GitHub
 
-```jsx
-import React, { useState } from 'react';
-import { DayNightToggle } from './DayNightToggle';
-
-export default function App() {
-  const [isDark, setIsDark] = useState(false);
-
-  return (
-    <div className={isDark ? 'dark-theme' : 'light-theme'}>
-      <DayNightToggle 
-        checked={isDark} 
-        onChange={(e) => setIsDark(e.target.checked)} 
-        size="md" // 'sm' | 'md' | 'lg'
-      />
-    </div>
-  );
-}
+1. Create a new repository on [GitHub](https://github.com/new) named `fluid-day-night-toggle`.
+2. In your terminal, run:
+```bash
+cd c:\Users\sirki\projects\fluid-day-night-toggle
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/fluid-day-night-toggle.git
+git push -u origin main
 ```
 
+> **Tip**: Once on GitHub, anyone can install directly from your repository without even publishing to npm:
+> ```bash
+> npm install github:YOUR_USERNAME/fluid-day-night-toggle
+> ```
+
 ---
 
-### 3. Vue 3 (Composition API)
+## 📦 How to Publish to NPM
 
-```vue
-<script setup>
-import { ref } from 'vue';
-import DayNightToggle from './DayNightToggle.vue';
-
-const isDarkMode = ref(false);
-</script>
-
-<template>
-  <main :data-theme="isDarkMode ? 'dark' : 'light'">
-    <DayNightToggle v-model="isDarkMode" size="md" />
-  </main>
-</template>
+1. If you don't already have an NPM account, create one at [npmjs.com](https://www.npmjs.com).
+2. Log in via your terminal:
+```bash
+npm login
+```
+3. *(Optional)* If the package name `fluid-day-night-toggle` is already taken on npm, update the `"name"` in `package.json` to a scoped name (e.g. `"@YOUR_USERNAME/fluid-day-night-toggle"`).
+4. Publish the package:
+```bash
+npm publish --access public
 ```
 
+Once published, your package is instantly available globally on:
+- **npm**: `npm i fluid-day-night-toggle`
+- **unpkg CDN**: `https://unpkg.com/fluid-day-night-toggle`
+- **jsdelivr CDN**: `https://cdn.jsdelivr.net/npm/fluid-day-night-toggle`
+
 ---
 
-## 🎨 Customizing with CSS Variables
+## 🎨 CSS Variables & Customization
 
-All sizing, speed, and easing parameters are controlled via clean CSS Custom Properties:
-
-| CSS Variable | Default | Description |
+| Variable | Default | Purpose |
 |---|---|---|
-| `--toggle-width` | `240px` | Total width of the toggle track |
-| `--toggle-height` | `96px` | Total height of the toggle track |
-| `--anim-dur` | `0.65s` | Duration of the celestial transition |
-| `--ease-elastic` | `cubic-bezier(0.34, 1.25, 0.64, 1)` | Physics spring easing curve |
-| `--sky-day-top` | `#2563eb` | Top gradient color for daytime sky |
-| `--sky-night-top`| `#101624` | Top gradient color for midnight sky |
-| `--sun-core` | `#ffd000` | Golden core color of the sun |
-| `--sun-crescent` | `#ffb703` | Crescent rim light visible under the moon |
-| `--moon-surface` | `#e2e8f0` | Lunar surface color |
-| `--crater-color` | `#9cb0c9` | Lunar crater fill |
+| `--toggle-width` | `240px` | Total width |
+| `--toggle-height` | `96px` | Total height |
+| `--anim-dur` | `0.65s` | Transition duration |
+| `--ease-elastic` | `cubic-bezier(0.34, 1.25, 0.64, 1)` | Physical bounce curve |
 
 ---
 
-## 📂 Project Structure
+## 📄 License
 
-```
-fluid-day-night-toggle/
-├── index.html           # Full interactive showcase with live controls & theme preview
-├── styles.css           # Showcase layout & full theme variables
-├── script.js            # Synthesized SFX, speed/scale controls & theme sync
-├── DayNightToggle.css   # Standalone component styles
-├── DayNightToggle.jsx   # Standalone React component
-├── DayNightToggle.vue   # Standalone Vue 3 component
-└── README.md            # Documentation & API reference
-```
+MIT
