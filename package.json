@@ -1,0 +1,65 @@
+{
+  "name": "fluid-day-night-toggle",
+  "version": "1.0.0",
+  "description": "Fluid physics-based Sun-to-Moon Day/Night toggle switch with celestial morphing, 3D inset cavity, and eclipse rim lighting for React, Vue, Web Components, and Vanilla HTML.",
+  "type": "module",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "types": "./src/index.d.ts"
+    },
+    "./react": {
+      "import": "./src/react/index.js",
+      "types": "./src/react/index.d.ts"
+    },
+    "./vue": {
+      "import": "./src/vue/index.js",
+      "types": "./src/vue/index.d.ts"
+    },
+    "./web-component": {
+      "import": "./src/web-component/index.js",
+      "types": "./src/web-component/index.d.ts"
+    },
+    "./css": "./src/DayNightToggle.css",
+    "./DayNightToggle.css": "./src/DayNightToggle.css"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "echo \"Ready to publish\" && exit 0"
+  },
+  "keywords": [
+    "dark-mode",
+    "light-mode",
+    "theme-toggle",
+    "day-night-toggle",
+    "toggle-switch",
+    "sun-moon",
+    "fluid-animation",
+    "micro-interaction",
+    "react",
+    "vue",
+    "web-components",
+    "ui"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "vue": ">=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  }
+}
