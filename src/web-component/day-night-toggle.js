@@ -27,11 +27,14 @@ class DayNightToggleElement extends HTMLElement {
   }
 
   get size() {
-    return this.getAttribute('size') || 'md';
+    const allowed = ['xs', 'sm', 'md', 'lg'];
+    const attr = this.getAttribute('size');
+    return allowed.includes(attr) ? attr : 'md';
   }
 
   set size(val) {
-    this.setAttribute('size', val);
+    const allowed = ['xs', 'sm', 'md', 'lg'];
+    this.setAttribute('size', allowed.includes(val) ? val : 'md');
   }
 
   get sound() {
@@ -202,6 +205,12 @@ class DayNightToggleElement extends HTMLElement {
 
         .day-night-toggle:active {
           transform: scale(0.97);
+        }
+
+        .day-night-toggle.size-xs {
+          --toggle-width: 96px;
+          --toggle-height: 38px;
+          --toggle-pad: 3px;
         }
 
         .day-night-toggle.size-sm {

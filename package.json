@@ -1,6 +1,6 @@
 {
   "name": "fluid-day-night-toggle",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Fluid physics-based Sun-to-Moon Day/Night toggle switch with celestial morphing, 3D inset cavity, and eclipse rim lighting for React, Vue, Web Components, and Vanilla HTML.",
   "type": "module",
   "main": "./src/index.js",

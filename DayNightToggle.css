@@ -29,6 +29,12 @@
 }
 
 /* Size Variants */
+.day-night-toggle.size-xs {
+  --toggle-width: 96px;
+  --toggle-height: 38px;
+  --toggle-pad: 3px;
+}
+
 .day-night-toggle.size-sm {
   --toggle-width: 150px;
   --toggle-height: 60px;
